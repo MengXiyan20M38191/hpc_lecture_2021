@@ -42,8 +42,8 @@ int main() {
    }
   }
   auto toc = chrono::steady_clock::now();
-  double time = chrono::duration<double>(toc - tic).count();
-  printf(" N=%d:total= %lf s (%lf GFlops)\n",N,time,2.*N*N*N/time/1e9);
+  double comp_time = chrono::duration<double>(toc - tic).count();
+  
 
   float err = 0;
  // for (int i=0; i<N; i++)
@@ -57,5 +57,9 @@ int main() {
   for (int i=0; i<N; i++)
     for (int j=0; j<N; j++)
         err+=fabs(C[i][j]);
-  printf("Error=%lf\n",err/N/N);
+
+    printf("N    : %d\n",N);
+    printf("comp : %lf s\n", comp_time);
+    printf("total: %lf s (%lf GFlops)\n", comp_time, 2.*N*N*N/comp_time/1e9);
+    printf("error: %lf\n",err/N/N);
 }
